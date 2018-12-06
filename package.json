@@ -1,5 +1,5 @@
 {
-  "name": "@conscia/watchmen-slack-plugin",
+  "name": "@conscia/watchmen-plugin-slack",
   "version": "0.0.3",
   "description": "Notifications via Slack for watchmen",
   "main": "index.js",
