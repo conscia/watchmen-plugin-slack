@@ -1,6 +1,6 @@
 # watchmen-plugin-slack
 
-A plugin for [watchmen](https://github.com/conscia/watchmen-slack-plugin) to send Slack
+A plugin for [watchmen](https://github.com/iloire/watchmen) to send Slack
 notifications on service.
 
 ## Slack Incoming Webhook
