@@ -32,22 +32,14 @@ const handleEvent = (eventName) => {
       return;
     }
 
-    const text = `[${friendlyNames[eventName]}] on ${service.name} ${service.url}`;
-    const options = {
-      text: text
-    };
-
-    axios.post(WATCHMEN_SLACK_NOTIFICATION_URL, Object.assign(defaultOptions, options));
+    axios.post(WATCHMEN_SLACK_NOTIFICATION_URL, Object.assign({
+      text: `[${friendlyNames[eventName]}] on ${service.name} ${service.url}`
+    }, defaultOptions));
   };
 };
 
 const SlackPlugin = watchmen => {
-  watchmen.on('latency-warning', handleEvent('latency-warning'));
-  watchmen.on('new-outage', handleEvent('new-outage'));
-  watchmen.on('current-outage', handleEvent('current-outage'));
-  watchmen.on('service-back', handleEvent('service-back'));
-  watchmen.on('service-error', handleEvent('service-error'));
-  watchmen.on('service-ok', handleEvent('service-ok'));
+  Object.keys(friendlyNames).forEach(eventName => watchmen.on(eventName, handleEvent(eventName)));
 };
 
 module.exports = SlackPlugin;
