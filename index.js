@@ -42,9 +42,9 @@ const handleEvent = (eventName) => {
     axios.post(WATCHMEN_SLACK_NOTIFICATION_URL, Object.assign({
       text: `
         *Event: [${friendlyNames[eventName]}]* 
-        *Service: ${service.name}
-        *Service URL: ${service.url}
-        ${duration ? 'Downtime:* ' + duration.humanize() : ''}
+        *Service:* ${service.name}
+        *Service URL:* ${service.url}
+        ${duration ? '*Downtime:* ' + duration.humanize() : ''}
       `
     }, defaultOptions));
   };
