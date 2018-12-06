@@ -27,13 +27,19 @@ const friendlyNames = {
 };
 
 const handleEvent = (eventName) => {
-  return (service) => {
+  return (service, data) => {
     if (notifications.indexOf(eventName) === -1) {
       return;
     }
 
     axios.post(WATCHMEN_SLACK_NOTIFICATION_URL, Object.assign({
-      text: `[${friendlyNames[eventName]}] on ${service.name} ${service.url}`
+      text: `
+        *Event: [${friendlyNames[eventName]}]* 
+        *Service: ${service.name}
+        *Service URL: ${service.url}
+        
+        *Error:* ${JSON.stringify(data)}
+      `
     }, defaultOptions));
   };
 };
