@@ -36,15 +36,15 @@ const handleEvent = (eventName) => {
     let duration;
 
     if (data.timestamp) {
-      duration = moment.duration(+new Date() - data.timestamp, 'seconds');
+      duration = moment.duration(new Date() - data.timestamp);
     }
 
     axios.post(WATCHMEN_SLACK_NOTIFICATION_URL, Object.assign({
       text: `
-        *Event: [${friendlyNames[eventName]}]* 
-        *Service:* ${service.name}
-        *Service URL:* ${service.url}
-        ${duration ? '*Downtime:* ' + duration.humanize() : ''}
+*Event: [${friendlyNames[eventName]}]
+*Service:* ${service.name}
+*Service URL:* ${service.url}
+${duration ? '*Downtime:* ' + duration.humanize() : ''}
       `
     }, defaultOptions));
   };
