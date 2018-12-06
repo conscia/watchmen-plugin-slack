@@ -1,4 +1,5 @@
 const axios = require('axios');
+const moment = require('moment');
 
 const {
   WATCHMEN_SLACK_NOTIFICATION_URL,
@@ -32,13 +33,18 @@ const handleEvent = (eventName) => {
       return;
     }
 
+    let duration;
+
+    if (data.timestamp) {
+      duration = moment.duration(+new Date() - data.timestamp, 'seconds');
+    }
+
     axios.post(WATCHMEN_SLACK_NOTIFICATION_URL, Object.assign({
       text: `
         *Event: [${friendlyNames[eventName]}]* 
         *Service: ${service.name}
         *Service URL: ${service.url}
-        
-        *Error:* ${JSON.stringify(data)}
+        ${duration ? 'Downtime:* ' + duration.humanize() : ''}
       `
     }, defaultOptions));
   };
